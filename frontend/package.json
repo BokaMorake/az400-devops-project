@@ -1,1 +1,7 @@
-{}
+{
+  "name": "bag-boutique-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo 'Bag Boutique build complete'"
+  }
+}
