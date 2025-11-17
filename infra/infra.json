@@ -1,1 +1,53 @@
-{}
+{
+  "project": "Bag Boutique E-Commerce Platform",
+  "environment": "production",
+  "version": "1.0.0",
+
+  "resources": {
+    "frontend": {
+      "type": "static-website",
+      "provider": "GitHub Pages",
+      "repository": "https://github.com/BokaMorake/az400-devops-project",
+      "deploy_url": "https://bokamorake.github.io/az400-devops-project/",
+      "build_method": "GitHub Actions",
+      "root_directory": "frontend",
+      "ci_pipeline": ".github/workflows/deploy-frontend.yml"
+    },
+
+    "backend": {
+      "type": "web-service",
+      "provider": "Render",
+      "service_name": "bag-boutique-backend",
+      "runtime": "Node.js 18",
+      "root_directory": "backend",
+      "entry_point": "server.js",
+      "start_command": "npm start",
+      "deploy_url": "https://bag-boutique-backend.onrender.com",
+      "ci_pipeline": "GitHub Actions (Render auto-deploy)"
+    },
+
+    "monitoring": {
+      "type": "ci-monitoring",
+      "provider": "GitHub Actions",
+      "workflows_monitored": [
+        "CI/CD pipeline",
+        "Deploy Frontend to GitHub Pages"
+      ],
+      "data_source": "monitoring/builds_issues.csv",
+      "dashboard_tool": "Excel / Power BI"
+    }
+  },
+
+  "relationships": {
+    "frontend_calls_backend": true,
+    "backend_exposes_api": true,
+    "api_endpoint_example": "https://bag-boutique-backend.onrender.com"
+  },
+
+  "security": {
+    "authentication": "None (Demo App)",
+    "https": true,
+    "repository_access": "Private until submission"
+  }
+}
+
